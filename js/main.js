@@ -1,9 +1,11 @@
 require.config({
     paths: {
+        templates: '../templates',
         jquery: 'libs/jquery/jquery-min',
         underscore: 'libs/underscore/underscore-min',
         backbone: 'libs/backbone/backbone-min',
-        bootstrap: 'libs/bootstrap-min'
+        bootstrap: 'libs/bootstrap-min',
+        mustache: 'libs/mustache/mustache'
     }
 });
 

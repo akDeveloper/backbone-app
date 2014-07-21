@@ -13,10 +13,18 @@ define([
             '*actions': 'defaultAction'
         },
         showProjects: function() {
-            console.log('projects');
+            require(['views/projects/list'], function(ProjectsListView) {
+
+                var listView = new ProjectsListView();
+                listView.render();
+            });
         },
         showHome: function() {
-            console.log('home');
+            require(['views/home'], function(HomeView) {
+
+                var homeView = new HomeView();
+                homeView.render();
+            });
         },
     });
 
