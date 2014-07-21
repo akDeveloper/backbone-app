@@ -19,8 +19,8 @@ define([
 
             this.collection = new ProjectsCollection();
 
-            this.collection.add({title: 'New Project'});
-            this.collection.add({title: 'New Project 2'});
+            this.collection.add({title: 'New Project', id: 1});
+            this.collection.add({title: 'New Project 2', id: 2});
         },
 
         render: function() {

@@ -1,8 +1,10 @@
+<div class="col-md-4">
 <h1>Projects</h1>
 <div class="projects-container">
-    <ul>
+    <ul class="list-group">
         {{#items}}
-        <li>{{title}}</li>
+        <li class="list-group-item list-edit"><a href="#projects/{{id}}">{{title}}</a></li>
         {{/items}}
     </ul>
+</div>
 </div>

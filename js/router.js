@@ -9,6 +9,8 @@ define([
 
             'projects': 'showProjects',
 
+            'projects/:id': 'editProject',
+
               // Default
             '*actions': 'defaultAction'
         },
@@ -18,6 +20,9 @@ define([
                 var listView = new ProjectsListView();
                 listView.render();
             });
+        },
+        editProject: function() {
+            $('#content').html('');
         },
         showHome: function() {
             require(['views/home'], function(HomeView) {
@@ -32,7 +37,8 @@ define([
         var app_router = new AppRouter;
 
         // Default
-        app_router.on('route:defaultAction', function(actions){
+        app_router.on('route:defaultAction', function(actions) {
+
             console.log('No route:', actions);
         });
 
