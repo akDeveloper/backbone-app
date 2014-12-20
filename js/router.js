@@ -4,25 +4,35 @@ define([
     'backbone',
 ], function($, _, Backbone){
     var AppRouter = Backbone.Router.extend({
+        execute: function(callback, args) {
+            console.log(location.hash);
+            if (callback) callback.apply(this, args);
+            $('.nav a').parent().removeClass('active');
+            $('a[href="'+location.hash+'"]').parent().addClass('active');
+        },
         routes: {
             '': 'showHome',
 
-            'projects': 'showProjects',
+            ':resource': 'listResource',
 
-            'projects/:id': 'editProject',
+            ':resource/:id/edit': 'editResource',
 
               // Default
             '*actions': 'defaultAction'
         },
-        showProjects: function() {
-            require(['views/projects/list'], function(ProjectsListView) {
+        listResource: function(resource) {
+            require(['views/'+resource+'/list'], function(View) {
 
-                var listView = new ProjectsListView();
+                var listView = new View();
                 listView.render();
             });
         },
-        editProject: function(id) {
-            $('#content').html('');
+        editResource: function(resource, id) {
+            require(['views/'+resource+'/edit'], function(View) {
+
+                var editView = new View();
+                editView.render();
+            });
         },
         showHome: function() {
             require(['views/home'], function(HomeView) {

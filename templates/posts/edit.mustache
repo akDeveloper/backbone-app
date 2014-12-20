@@ -1,0 +1,14 @@
+<h1>Edit Post</h1>
+<form action="" method="post">
+    <div class="form-group">
+        <label for="post-title">Title</label>
+        <input class="form-control" type="text" name="post['title']" value="{{item.slug}}" id="post-title" />
+    </div>
+    <div class="form-group">
+        <label for="post-slug">Url</label>
+        <div class="input-group">
+            <div class="input-group-addon">http://www.example.com</div>
+            <input type="text" name="post[slug]" class="form-control" id="post-slug" value="{{item.slug}}">
+        </div>
+    </div>
+</form>

@@ -1,4 +1,4 @@
-window.onerror = function(messsage, url, line, col, error) {
+window.onerror = function(message, url, line, col, error) {
     // Available in gecko engines.
     var extra = !col ? '' : '\ncolumn: ' + col;
     extra += !error ? '' : '\nerror: ' + error;

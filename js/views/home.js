@@ -12,7 +12,7 @@ define([
     homeTemplate
 ){
     var HomeView = Backbone.View.extend({
-        el: $('#content'),
+        el: $('.main'),
         initialize: function() {
         },
 
