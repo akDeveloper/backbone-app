@@ -21,7 +21,7 @@ define([
                 listView.render();
             });
         },
-        editProject: function() {
+        editProject: function(id) {
             $('#content').html('');
         },
         showHome: function() {
