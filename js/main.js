@@ -10,12 +10,25 @@ window.onerror = function(message, url, line, col, error) {
 
 require.config({
     paths: {
+        domReady: 'libs/require/domReady',
         templates: '../templates',
         jquery: 'libs/jquery/jquery-min',
         underscore: 'libs/underscore/underscore-min',
         backbone: 'libs/backbone/backbone-min',
         bootstrap: 'libs/bootstrap.min',
-        mustache: 'libs/mustache/mustache'
+        mustache: 'libs/mustache/mustache',
+        tinymce: 'http://tinymce.cachefly.net/4.1/tinymce.min'
+    },
+    shim: {
+        bootstrap: {
+            deps: ['jquery']
+        },
+        tinymce: {
+            exports: 'tinymce',
+            init: function () {
+                return this.tinymce;
+            }
+        },
     }
 });
 

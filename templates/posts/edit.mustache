@@ -4,6 +4,7 @@
         <label for="post-title">Title</label>
         <input class="form-control" type="text" name="post['title']" value="{{item.slug}}" id="post-title" />
     </div>
+    
     <div class="form-group">
         <label for="post-slug">Url</label>
         <div class="input-group">
@@ -11,4 +12,10 @@
             <input type="text" name="post[slug]" class="form-control" id="post-slug" value="{{item.slug}}">
         </div>
     </div>
+
+    <div class="form-group">
+        <label for="post-content">Content</label>
+        <textarea id="post-content" class="form-control mceEditor" name="post[content]" rows="10" cols="30"></textarea>
+    </div>
+    <a class="btn btn-default" href="#posts">Cancel</a> <button type="submit" class="btn btn-primary" data-action="save">Save</button>
 </form>
