@@ -1,0 +1,17 @@
+<h1>Edit project</h1>
+<form action="" method="post" id="project-edit">
+    <div class="form-group">
+        <label for="project-title">Title</label>
+        <input class="form-control" type="text" name="project[title]" value="{{item.title}}" id="project-title" />
+    </div>
+    
+    <div class="form-group">
+        <label for="project-slug">Url</label>
+        <div class="input-group">
+            <div class="input-group-addon">http://www.example.com</div>
+            <input type="text" name="project[slug]" class="form-control" id="project-slug" value="{{item.slug}}">
+        </div>
+    </div>
+
+    <a class="btn btn-default" href="#projects">Cancel</a> <button type="submit" class="btn btn-primary" data-action="save">Save</button>
+</form>

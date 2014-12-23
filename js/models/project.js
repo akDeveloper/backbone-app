@@ -1,8 +1,12 @@
 define([
     'underscore',
     'backbone',
-], function(_, Backbone){
-    var ProjectModel = Backbone.Model.extend({
+    'models/model'
+], function(_, Backbone, Model){
+    var ProjectModel = Model.extend({
+        url: function() {
+            return "posts/"+ (this.id || '');
+        },
         initialize: function() {
         },
         defaults: {

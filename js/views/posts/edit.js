@@ -5,7 +5,6 @@ define([
     'mustache',
     'text!templates/posts/edit.mustache',
     'models/post',
-    'domReady',
     'tinymce'
 ], function(
     $,
@@ -14,7 +13,6 @@ define([
     Mustache,
     editTemplate,
     PostModel,
-    domReady,
     tinymce
 ){
     var PostEditView = Backbone.View.extend({
@@ -24,7 +22,7 @@ define([
         },
 
         events: {
-            'submit form': 'save'
+            'submit #post-edit': 'save'
         },
 
         render: function() {
@@ -53,10 +51,13 @@ define([
         },
         save: function(e) {
             e.preventDefault();
-            console.log(e);
             var form = $(e.currentTarget);
 
-            console.log(form.serializeArray());
+            this.model.setAttributes(form.serialize(), 'post');
+            this.model.save();
+            console.log(this.model);
+
+
         }
     });
 

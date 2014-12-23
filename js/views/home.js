@@ -12,13 +12,13 @@ define([
     homeTemplate
 ){
     var HomeView = Backbone.View.extend({
-        el: $('.main'),
         initialize: function() {
         },
 
         render: function() {
             var compiledTemplate = Mustache.render(homeTemplate);
 
+            console.log(this.el);
             this.$el.html(compiledTemplate);
         }
     });

@@ -10,7 +10,6 @@ window.onerror = function(message, url, line, col, error) {
 
 require.config({
     paths: {
-        domReady: 'libs/require/domReady',
         templates: '../templates',
         jquery: 'libs/jquery/jquery-min',
         underscore: 'libs/underscore/underscore-min',

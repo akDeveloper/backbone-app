@@ -28,10 +28,16 @@ define([
             });
         },
         editResource: function(resource, id) {
+            var self = this;
             require(['views/'+resource+'/edit'], function(View) {
 
-                var editView = new View();
-                editView.render();
+                if (self.editView) {
+                    self.editView.undelegateEvents();
+                    $(self.editView.el).empty();
+                }
+                self.editView = new View();
+                self.editView.render();
+
             });
         },
         showHome: function() {
@@ -52,7 +58,18 @@ define([
             console.log('No route:', actions);
         });
 
-        Backbone.history.start();
+        Backbone.history.start({pushState: true});
+        //
+        $(document).on('click', 'a:not([data-bypass])', function (evt) {
+
+            var href = $(this).attr('href');
+            var protocol = this.protocol + '//';
+
+            if (href.slice(protocol.length) !== protocol) {
+                evt.preventDefault();
+                app_router.navigate(href, true);
+            }
+        });
     };
 
     return {
