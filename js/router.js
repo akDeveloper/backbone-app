@@ -5,10 +5,9 @@ define([
 ], function($, _, Backbone){
     var AppRouter = Backbone.Router.extend({
         execute: function(callback, args) {
-            console.log(location.hash);
             if (callback) callback.apply(this, args);
             $('.nav a').parent().removeClass('active');
-            $('a[href="'+location.hash+'"]').parent().addClass('active');
+            $('a[href="'+location.pathname+'"]').parent().addClass('active');
         },
         routes: {
             '': 'showHome',
@@ -23,8 +22,11 @@ define([
         listResource: function(resource) {
             require(['views/'+resource+'/list'], function(View) {
 
-                var listView = new View();
-                listView.render();
+                if (self.listView) {
+                    self.listView.undelegateEvents();
+                    $(self.listView.el).empty();
+                }
+                self.listView = new View();
             });
         },
         editResource: function(resource, id) {
@@ -35,8 +37,15 @@ define([
                     self.editView.undelegateEvents();
                     $(self.editView.el).empty();
                 }
-                self.editView = new View();
-                self.editView.render();
+                if (self.listView) {
+                    var collection = self.listView.collection;
+                    var model = self.editView.collection.findWhere({id: id});
+
+                    self.editView = new View({collection: collection, model: model});
+
+                } else {
+                    self.editView = new View({id: id});
+                }
 
             });
         },

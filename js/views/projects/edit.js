@@ -4,19 +4,24 @@ define([
     'backbone',
     'mustache',
     'text!templates/projects/edit.mustache',
-    'models/project'
+    'models/project',
+    'collections/projects',
+    'views/editView'
 ], function(
     $,
     _,
     Backbone,
     Mustache,
     editTemplate,
-    ProjectModel
+    ProjectModel,
+    ProjectCollection,
+    editView
 ){
-    var ProjectEditView = Backbone.View.extend({
+    var ProjectEditView = editView.extend({
         el: $('.main'),
+        collection: new ProjectCollection(),
         initialize: function() {
-            this.model = new ProjectModel({title: 'Test', slug: 'test'});
+            this.init();
         },
 
         events: {

@@ -18,9 +18,16 @@ define([
         initialize: function() {
 
             this.collection = new PostsCollection();
+            var self = this;
+            this.collection.fetch({
+                success: function(collection, response, options) {
+                    self.render();
 
-            this.collection.add({title: 'New Project', id: 1});
-            this.collection.add({title: 'New Project 2', id: 2});
+                },
+                error: function(collection, response, options) {
+
+                }
+            });
         },
 
         render: function() {

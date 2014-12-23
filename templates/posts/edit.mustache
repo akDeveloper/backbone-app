@@ -2,7 +2,7 @@
 <form action="" method="post" id="post-edit">
     <div class="form-group">
         <label for="post-title">Title</label>
-        <input class="form-control" type="text" name="post[title]" value="{{item.slug}}" id="post-title" />
+        <input class="form-control" type="text" name="post[title]" value="{{item.title}}" id="post-title" />
     </div>
     
     <div class="form-group">
@@ -15,7 +15,7 @@
 
     <div class="form-group">
         <label for="post-content">Content</label>
-        <textarea id="post-content" class="form-control mceEditor" name="post[content]" rows="10" cols="30"></textarea>
+        <textarea id="post-content" class="form-control mceEditor" name="post[content]" rows="10" cols="30">{{item.content}}</textarea>
     </div>
     <a class="btn btn-default" href="#posts">Cancel</a> <button type="submit" class="btn btn-primary" data-action="save">Save</button>
 </form>

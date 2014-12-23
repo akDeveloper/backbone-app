@@ -5,6 +5,8 @@ define([
     'mustache',
     'text!templates/posts/edit.mustache',
     'models/post',
+    'collections/posts',
+    'views/editView',
     'tinymce'
 ], function(
     $,
@@ -13,12 +15,15 @@ define([
     Mustache,
     editTemplate,
     PostModel,
+    PostCollection,
+    editView,
     tinymce
 ){
-    var PostEditView = Backbone.View.extend({
+    var PostEditView = editView.extend({
         el: $('.main'),
+        collection: new PostCollection(),
         initialize: function() {
-            this.model = new PostModel({title: 'Test', slug: 'test'});
+            this.init();
         },
 
         events: {
@@ -55,9 +60,6 @@ define([
 
             this.model.setAttributes(form.serialize(), 'post');
             this.model.save();
-            console.log(this.model);
-
-
         }
     });
 

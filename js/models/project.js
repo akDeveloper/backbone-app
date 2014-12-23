@@ -5,7 +5,7 @@ define([
 ], function(_, Backbone, Model){
     var ProjectModel = Model.extend({
         url: function() {
-            return "posts/"+ (this.id || '');
+            return "/api/projects/"+ (this.id || '');
         },
         initialize: function() {
         },
