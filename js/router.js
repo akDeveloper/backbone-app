@@ -14,6 +14,8 @@ define([
 
             ':resource': 'listResource',
 
+            ':resource/new': 'newResource',
+
             ':resource/:id/edit': 'editResource',
 
               // Default
@@ -27,6 +29,20 @@ define([
                     $(self.listView.el).empty();
                 }
                 self.listView = new View();
+            });
+        },
+        newResource: function(resource) {
+            var self = this;
+            require(['views/'+resource+'/edit', 'models/'+resource], function(View, Model) {
+
+                if (self.newView) {
+                    self.newView.undelegateEvents();
+                    $(self.newView.el).empty();
+                }
+
+                var model = new Model();
+                self.newView = new View({model: model});
+
             });
         },
         editResource: function(resource, id) {
@@ -46,7 +62,6 @@ define([
                 } else {
                     self.editView = new View({id: id});
                 }
-
             });
         },
         showHome: function() {

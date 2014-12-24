@@ -5,7 +5,7 @@ define([
     'mustache',
     'text!templates/posts/edit.mustache',
     'models/post',
-    'collections/posts',
+    'collections/post',
     'views/editView',
     'tinymce'
 ], function(

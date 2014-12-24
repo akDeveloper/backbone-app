@@ -4,20 +4,20 @@ define([
     'backbone',
     'mustache',
     'text!templates/posts/list.mustache',
-    'collections/posts'
+    'collections/post'
 ], function(
     $,
     _,
     Backbone,
     Mustache,
     listTemplate,
-    PostsCollection
+    PostCollection
 ){
     var PostsListView = Backbone.View.extend({
         el: $('.main'),
+        collection: new PostCollection(),
         initialize: function() {
 
-            this.collection = new PostsCollection();
             var self = this;
             this.collection.fetch({
                 success: function(collection, response, options) {

@@ -4,11 +4,11 @@ define([
     'models/post',
     'localstorage'
 ], function(_, Backbone, PostModel) {
-    var PostsCollection = Backbone.Collection.extend({
+    var PostCollection = Backbone.Collection.extend({
         model: PostModel,
         url: '/posts',
         localStorage: new Backbone.LocalStorage('demo')
     });
 
-    return PostsCollection;
+    return PostCollection;
 });

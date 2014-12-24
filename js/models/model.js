@@ -9,7 +9,9 @@ define([
             parse_str(string, a);
             this.set(a[resource]);
         },
-        localStorage: new Backbone.LocalStorage('demo')
+        localStorage: function () {
+            return new Backbone.LocalStorage(this.table);
+        }
     });
 
     return Model;

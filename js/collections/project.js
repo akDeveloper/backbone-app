@@ -3,10 +3,11 @@ define([
     'backbone',
     'models/project',
 ], function(_, Backbone, ProjectModel) {
-    var ProjectsCollection = Backbone.Collection.extend({
+    var ProjectCollection = Backbone.Collection.extend({
         model: ProjectModel,
         url: '/projects',
+        localStorage: new Backbone.LocalStorage('projects')
     });
 
-    return ProjectsCollection;
+    return ProjectCollection;
 });

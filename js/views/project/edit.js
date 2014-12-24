@@ -5,7 +5,7 @@ define([
     'mustache',
     'text!templates/projects/edit.mustache',
     'models/project',
-    'collections/projects',
+    'collections/project',
     'views/editView'
 ], function(
     $,
@@ -40,7 +40,7 @@ define([
             e.preventDefault();
             var form = $(e.currentTarget);
 
-            this.model.setAttributes(form.serialize(), 'post');
+            this.model.setAttributes(form.serialize(), 'project');
             this.model.save();
         }
     });
