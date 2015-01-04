@@ -103,8 +103,9 @@ define([
                     var collection = new Collection();
                     collection.fetch({
                         success: function(collection, response, options) {
-                            self.editView = new View({model: model, collection: collection});
                             self.collections[resource] = collection;
+                            var model = self.collections[resource].findWhere({id: id});
+                            self.editView = new View({model: model, collection: self.collections[resource]});
                             self.editView.render();
                         },
                         error: function(collection, response, options) {
