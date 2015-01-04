@@ -1,13 +1,20 @@
-<div class="row">
+<a href="" class="btn btn-primary"><i class="fa fa-chevron-left"></i> Blog posts</a>
+<a href="/post/new" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>&nbsp;</th>
+        </tr>           
+    </thead>
+    <tbody>
+        {{#items}}
+        <tr>
+            <td><a href="post/{{id}}/edit">{{title}}</a></td>
+            <td><a class="delete" data-id="{{id}}" data-bypass="true" href="#"><i class="fa fa-trash"></i></a></td>
+        </tr>
+        {{/items}}               
+    </tbody>
 
-    <div class="col-md-4">
-        <h1>Blog posts</h1>
-        <div class="projects-container">
-            <ul class="list-group">
-                {{#items}}
-                <li class="list-group-item list-edit"><a href="post/{{id}}/edit">{{title}}</a></li>
-                {{/items}}
-            </ul>
-        </div>
-    </div>
-</div>
+</table>
+

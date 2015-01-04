@@ -4,6 +4,10 @@ define([
     'backbone',
 ], function($, _, Backbone){
     var AppRouter = Backbone.Router.extend({
+        listView: null,
+        newView: null,
+        editView: null,
+        collections: {},
         execute: function(callback, args) {
             if (callback) callback.apply(this, args);
             $('.nav a').parent().removeClass('active');
@@ -22,45 +26,91 @@ define([
             '*actions': 'defaultAction'
         },
         listResource: function(resource) {
-            require(['views/'+resource+'/list'], function(View) {
+            var self = this;
+            require(['views/'+resource+'/list', 'collections/'+resource], function(View, Collection) {
 
                 if (self.listView) {
                     self.listView.undelegateEvents();
                     $(self.listView.el).empty();
                 }
-                self.listView = new View();
+                if (self.collections[resource]) {
+                    self.listView = new View({collection: self.collections[resource]});
+                    self.listView.render();
+                } else {
+                    var collection = new Collection();
+                    collection.fetch({
+                        success: function(collection, response, options) {
+                            self.listView = new View({collection: collection});
+                            self.collections[resource] = collection;
+                            self.listView.render();
+                        },
+                        error: function(collection, response, options) {
+
+                        }
+                    });
+                }
             });
         },
         newResource: function(resource) {
             var self = this;
-            require(['views/'+resource+'/edit', 'models/'+resource], function(View, Model) {
-
-                if (self.newView) {
-                    self.newView.undelegateEvents();
-                    $(self.newView.el).empty();
-                }
-
-                var model = new Model();
-                self.newView = new View({model: model});
-
-            });
-        },
-        editResource: function(resource, id) {
-            var self = this;
-            require(['views/'+resource+'/edit'], function(View) {
+            require(['views/'+resource+'/edit', 'models/'+resource, 'collections/'+resource], function(View, Model, Collection) {
 
                 if (self.editView) {
                     self.editView.undelegateEvents();
                     $(self.editView.el).empty();
                 }
-                if (self.listView) {
-                    var collection = self.listView.collection;
-                    var model = self.editView.collection.findWhere({id: id});
 
-                    self.editView = new View({collection: collection, model: model});
+                var model = new Model();
+                if (self.collections[resource]) {
+                    self.editView = new View({
+                        model: model,
+                        collection: self.collections[resource]
+                    });
+                    self.editView.render();
+                } else {
+                    var collection = new Collection();
+                    collection.fetch({
+                        success: function(collection, response, options) {
+                            self.collections[resource] = collection;
+                            self.editView = new View({
+                                model: model,
+                                collection: self.collections[resource]
+                            });
+                            self.editView.render();
+                        },
+                        error: function(collection, response, options) {
+
+                        }
+                    });
+                }
+            });
+        },
+        editResource: function(resource, id) {
+            var self = this;
+            require(['views/'+resource+'/edit', 'collections/'+resource], function(View, Collection) {
+
+                if (self.editView) {
+                    self.editView.undelegateEvents();
+                    $(self.editView.el).empty();
+                }
+                if (self.collections[resource]) {
+                    var model = self.collections[resource].findWhere({id: id});
+
+                    self.editView = new View({collection: self.collections[resource], model: model});
+                    self.editView.render();
 
                 } else {
-                    self.editView = new View({id: id});
+                    var collection = new Collection();
+                    collection.fetch({
+                        success: function(collection, response, options) {
+                            self.editView = new View({model: model, collection: collection});
+                            self.collections[resource] = collection;
+                            self.editView.render();
+                        },
+                        error: function(collection, response, options) {
+
+                        }
+                    });
                 }
             });
         },

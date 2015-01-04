@@ -3,6 +3,12 @@ body {
   font-family: 'open sans', sans-serif;
   padding-top: 50px;}
 
+.nav i.fa {
+  margin-right: 4px;}
+
+.main {
+  margin-top: 15px;}
+
 /*Navbar*/
 .navbar-fixed-top {
   border: 0;}

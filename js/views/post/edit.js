@@ -19,11 +19,10 @@ define([
     editView,
     tinymce
 ){
-    var PostEditView = editView.extend({
+    var PostEditView = Backbone.View.extend({
         el: $('.main'),
         collection: new PostCollection(),
         initialize: function() {
-            this.init();
         },
 
         events: {
@@ -59,6 +58,11 @@ define([
             var form = $(e.currentTarget);
 
             this.model.setAttributes(form.serialize(), 'post');
+
+            if (this.model.isNew()) {
+                this.collection.add(this.model);
+            }
+
             this.model.save();
         }
     });

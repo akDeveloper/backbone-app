@@ -17,19 +17,10 @@ define([
         el: $('.main'),
         collection: new PostCollection(),
         initialize: function() {
-
-            var self = this;
-            this.collection.fetch({
-                success: function(collection, response, options) {
-                    self.render();
-
-                },
-                error: function(collection, response, options) {
-
-                }
-            });
         },
-
+        events: {
+            'click .delete': 'deleteItem'
+        },
         render: function() {
             var compiledTemplate = Mustache.render(
                     listTemplate,
@@ -38,6 +29,18 @@ define([
 
             this.$el.html(compiledTemplate);
 
+        },
+        deleteItem: function(e) {
+            e.preventDefault();
+
+            var $el = $(e.currentTarget);
+            var id = $el.attr('data-id');
+
+            var model = this.collection.findWhere({id: id});
+            this.collection.remove(model);
+            model.destroy();
+
+            $el.parents('tr').remove();
         }
     });
 

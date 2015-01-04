@@ -11,19 +11,18 @@ define([
 ){
     var AbstractEditView = Backbone.View.extend({
         init: function() {
-            if (this.model) {
-                this.render();
-            } else {
-                var self = this;
-                this.collection.fetch({
-                    success: function(collection, response, options) {
-                        self.model = collection.findWhere({id: self.id});
-                        self.render();
-                    },
-                    error: function(model, response, options) {
+            var self = this;
+            this.collection.fetch({
+                success: function(collection, response, options) {
+                    var hit;
+                    if (hit = collection.findWhere({id: self.id})) {
+                        self.model = hit;
                     }
-                });
-            }
+                    self.render();
+                },
+                error: function(model, response, options) {
+                }
+            });
         }
     });
 
