@@ -14,7 +14,6 @@ require.config({
         jquery: 'libs/jquery/jquery-min',
         underscore: 'libs/underscore/underscore-min',
         backbone: 'libs/backbone/backbone-min',
-        backbone: 'libs/backbone/backbone-min',
         localstorage: 'libs/backbone/backbone.localStorage-min',
         bootstrap: 'libs/bootstrap.min',
         mustache: 'libs/mustache/mustache',
